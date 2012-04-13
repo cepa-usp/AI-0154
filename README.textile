@@ -1,0 +1,4 @@
+h1. Colonização do ambiente terrestre
+
+Esta Atividade Interativa (AI) é um jogo sobre a colonização do ambiente terrestre por plantas. Nele o usuário tem à sua disposição um cenário diversificado, e cabe a ele posicionar corretamente as espécies de plantas.
+
