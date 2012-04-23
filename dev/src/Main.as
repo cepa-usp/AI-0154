@@ -1,5 +1,6 @@
 package 
 {
+	import controller.ScenarioController;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import model.Model;
@@ -22,8 +23,9 @@ package
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			var mdl:Model = new Model();
-			var scenario:Scenario = new Scenario();
-			
+			var scenario:Scenario = new Scenario(mdl);			
+			addChild(scenario);
+			var ctrl:ScenarioController = new ScenarioController(mdl, scenario);
 			
 		}
 		

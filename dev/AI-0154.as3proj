@@ -1,22 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project version="2">
+<project>
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie disabled="False" />
     <movie input="" />
     <movie path="bin\AI0154.swf" />
     <movie fps="30" />
     <movie width="700" />
     <movie height="600" />
     <movie version="11" />
-    <movie minorVersion="0" />
-    <movie platform="Flash Player" />
     <movie background="#FFFFFF" />
-    <movie preferredSDK="2 - Flex 4.6.0, AIR 3.1;4.6.0, 3.1;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="src" />
+    <class path="..\..\Framework\dev\AI\lib" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -27,7 +25,6 @@
     <option locale="" />
     <option loadConfig="" />
     <option optimize="True" />
-    <option omitTraces="True" />
     <option showActionScriptWarnings="True" />
     <option showBindingWarnings="True" />
     <option showInvalidCSS="True" />
@@ -43,7 +40,7 @@
     <option staticLinkRSL="True" />
     <option additional="" />
     <option compilerConstants="" />
-    <option minorVersion="" />
+    <option customSDK="" />
   </build>
   <!-- SWC Include Libraries -->
   <includeLibraries>
@@ -51,7 +48,7 @@
   </includeLibraries>
   <!-- SWC Libraries -->
   <libraryPaths>
-    <!-- example: <element path="..." /> -->
+    <element path="lib\arte.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
@@ -86,6 +83,4 @@
     <option showHiddenPaths="False" />
     <option testMovie="Default" />
   </options>
-  <!-- Plugin storage -->
-  <storage />
 </project>

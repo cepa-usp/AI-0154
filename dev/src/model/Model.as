@@ -10,11 +10,11 @@ package model
 	{
 		private var _plants:Vector.<Plant> = new Vector.<Plant>();
 		private var _environment:Enviro;
-		private var eventDispatcher:EventDispatcher = new EventDispatcher();
+		private var _eventDispatcher:EventDispatcher = new EventDispatcher();
 		public function Model()
 		{
-			PlantLoader.getInstance().load(this);
 			EnvironmentLoader.getInstance().load(this);
+			PlantLoader.getInstance().load(this);			
 			eventDispatcher.dispatchEvent(new Event("MODEL_LOADED"));
 		}
 		
@@ -36,6 +36,16 @@ package model
 		public function set environment(value:Enviro):void 
 		{
 			_environment = value;
+		}
+		
+		public function get eventDispatcher():EventDispatcher 
+		{
+			return _eventDispatcher;
+		}
+		
+		public function set eventDispatcher(value:EventDispatcher):void 
+		{
+			_eventDispatcher = value;
 		}
 		
 

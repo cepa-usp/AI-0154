@@ -1,12 +1,12 @@
 package model 
 {
+	import flash.utils.Dictionary;
 	/**
 	 * ...
 	 * @author Arthur
 	 */
 	public class EnvironmentLoader 
 	{
-		
 		private static var _instance:EnvironmentLoader = new EnvironmentLoader();
 		public function EnvironmentLoader() 
 		{
@@ -14,9 +14,11 @@ package model
 		}
 
 		
+		
 		public function load(mdl:Model):void {
 			var env:Enviro = new Enviro(70, 50);
 			mdl.environment = env;
+			
 		}
 		
 		public static function getInstance():EnvironmentLoader 
