@@ -64,7 +64,7 @@ package view
 			Actuate.timer(2).onComplete(plantFixed, pg.instance)
 		}
 
-		private function plantFixed(instance:PlantInstance) {
+		private function plantFixed(instance:PlantInstance):void {
 			var ev:ScenarioEvent = new ScenarioEvent(ScenarioEvent.PLANT_FIXED, true);
 			ev.vars.instance = instance;
 			dispatchEvent(ev);
@@ -137,14 +137,15 @@ package view
 			
 		}
 		
-		private function bindPicker() {
+		private function bindPicker():void {
 			for (var i:int = 0;i < mdl.plants.length; i++) {				
 				var pc:PlantContainerViewer = PlantContainerViewer(plantPicker.getChildByName("plantContainer_" + i));
 				pc.mouseChildren = false;
 				pc.buttonMode = true;
 				pc.useHandCursor = true;
+				mdl.eventDispatcher.addEventListener(PlantEvent.INSTANCE_CHANGED, pc.onInstanceChanged);
 				pc.addEventListener(MouseEvent.MOUSE_OVER, onPlantContainerMouseOver);
-				pc.addEventListener(MouseEvent.MOUSE_OUT, function(e:MouseEvent) {
+				pc.addEventListener(MouseEvent.MOUSE_OUT, function(e:MouseEvent):void {
 					hideDetails();
 				});	
 				pc.addEventListener(MouseEvent.MOUSE_DOWN, onPlantContainerMouseDown);
@@ -153,6 +154,7 @@ package view
 		
 		private function onPlantContainerMouseDown(e:MouseEvent):void 
 		{
+			if (!PlantContainerViewer(e.target).enabled) return;
 			hideDetails(0.5);
 			createGhost(PlantContainerViewer(e.target));
 		}

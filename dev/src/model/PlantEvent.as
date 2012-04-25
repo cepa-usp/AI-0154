@@ -10,10 +10,12 @@ package model
 	{
 		
 		
+		
 		private var _instance:PlantInstance;
 		private var _plant:Plant;
 		private var vars:Object = new Object();
 		
+		static public const INSTANCE_CHANGED:String = "instanceChanged";
 		public static const STATE_CHANGED:String = "StateChanged";
 		public static const POSITION_SET:String = "PositionSet";
 		

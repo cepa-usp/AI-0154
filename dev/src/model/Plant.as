@@ -20,7 +20,7 @@ package model
 			this.id = id;			
 		}
 		
-		public function createInstances(amnt:int, env:Enviro) {
+		public function createInstances(amnt:int, env:Enviro):void {
 			_instances = new Vector.<PlantInstance>();
 			for (var i:int = 0; i < amnt; i++) {
 				_instances.push(new PlantInstance(this, env));
@@ -30,7 +30,7 @@ package model
 		public function getAvailableInstances():int {
 			var qt:int = 0;
 			for each(var pi:PlantInstance in instances) {
-				if (pi.state = PlantInstance.STATE_UNLOADED) {
+				if (pi.state == PlantInstance.STATE_UNLOADED) {
 					qt++;
 				}
 			}
@@ -98,23 +98,31 @@ package model
 			_currentInstance = value;
 		}
 
-		public function seedInstance(x:int, y:int) {
+		public function seedInstance(x:int, y:int):void {
 			instances[currentInstance].setPosition(x, y);
 		}
 		
-		public function notifyInstanceStateChange(inst:PlantInstance) {
+		public function notifyInstanceStateChange(inst:PlantInstance):void {
 			var ev:PlantEvent = new PlantEvent(PlantEvent.STATE_CHANGED)
 			ev.instance = inst;
 			ev.plant = this;
 			mdl.eventDispatcher.dispatchEvent(ev);			
 		}
-		public function notifyInstancePositionSet(inst:PlantInstance) {
+		public function notifyInstancePositionSet(inst:PlantInstance):void {
 			var ev:PlantEvent = new PlantEvent(PlantEvent.POSITION_SET)
 			ev.instance = inst;
 			ev.plant = this;			
 			mdl.eventDispatcher.dispatchEvent(ev);
-			currentInstance++;
+			changeCurrentInstance();
 		}
+		
+		public function changeCurrentInstance() {
+			currentInstance++;
+			var ev:PlantEvent = new PlantEvent(PlantEvent.INSTANCE_CHANGED);
+			ev.plant = this;
+			mdl.eventDispatcher.dispatchEvent(ev)
+		}
+		
 	}
 
 }

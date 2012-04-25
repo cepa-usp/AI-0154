@@ -14,7 +14,7 @@ package model
 			if( _instance ) throw new Error( "PlantLoader can only be accessed through PlantLoader.getInstance()" ); 
 		}
 		
-		public function load(mdl:Model) {
+		public function load(mdl:Model):void {
 			var p_1:Plant = new Plant(1, mdl);
 			p_1.hints.push("Dica 1");
 			p_1.hints.push("Dica 2");
@@ -36,7 +36,8 @@ package model
 			p_2.name = "Planctis secundum";
 			p_2.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_2);			
-			
+			mdl.environment.setRegionsForPlant(2, new Rectangle(50, 0, 20, 20));
+			mdl.environment.setRegionsForPlant(2, new Rectangle(0, 0, 10, 10));	
 		}
 		
 		public static function getInstance():PlantLoader

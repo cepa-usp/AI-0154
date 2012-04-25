@@ -43,10 +43,19 @@ package view
 			return p;
 		}
 				
-		private function onEnterFrame(e:Event) {
+		private function onEnterFrame(e:Event):void {
 			if (src.currentFrame >= (_state + FRAMES - 1)) {
+				if (_state == STATE_DEAD) {
+					onDead();
+					return;
+				}
 				src.gotoAndPlay(_state);
 			}
+		}
+		
+		private function onDead():void {
+			src.stop();
+			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 		}
 		
 		

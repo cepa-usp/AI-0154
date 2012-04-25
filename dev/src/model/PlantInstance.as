@@ -13,6 +13,7 @@ package model
 		private var _state:int = 0;
 		
 		public static const STATE_UNLOADED:int = 0;
+		public static const STATE_EVALUATING:int = 3;
 		public static const STATE_POSITION_RIGHT:int = 1;
 		public static const STATE_POSITION_WRONG:int = 2;		
 		
@@ -25,13 +26,14 @@ package model
 			return _position;
 		
 		}
-		public function setPosition(x:int, y:int) {
+		public function setPosition(x:int, y:int):void {
+			state = STATE_EVALUATING;
 			_position.x = x;
 			_position.y = y;			
 			plant.notifyInstancePositionSet(this);
 		}
 		
-		public function evaluatePosition() {
+		public function evaluatePosition():void {
 			if (environment.isPositionForPlant(plant.id, _position.x, _position.y)) {
 				state = STATE_POSITION_RIGHT;
 			} else {
