@@ -24,7 +24,7 @@ package view
 
 		}
 		
-		public function changeState(state:int) {			
+		public function changeState(state:int):void {			
 			this._state = state;
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 			src.gotoAndStop(state);
@@ -67,6 +67,24 @@ package view
 				case 2:
 					return preparePlant(new Plant2());
 					break;					
+				case 3:
+					return preparePlant(new Plant2());
+					break;					
+				case 4:
+					return preparePlant(new Plant2());
+					break;					
+				case 5:
+					return preparePlant(new Plant2());
+					break;										
+				case 6:
+					return preparePlant(new Plant2());				
+					break;							
+				case 7:
+					return preparePlant(new Plant2());
+					break;										
+				case 8:
+					return preparePlant(new Plant2());
+					break;															
 			}
 			return null;
 		}

@@ -106,6 +106,9 @@ package model
 			var ev:PlantEvent = new PlantEvent(PlantEvent.STATE_CHANGED)
 			ev.instance = inst;
 			ev.plant = this;
+			if (inst.state == PlantInstance.STATE_POSITION_WRONG) {
+				hintsShow.push(_hints.pop());
+			}
 			mdl.eventDispatcher.dispatchEvent(ev);			
 		}
 		public function notifyInstancePositionSet(inst:PlantInstance):void {
@@ -116,7 +119,7 @@ package model
 			changeCurrentInstance();
 		}
 		
-		public function changeCurrentInstance() {
+		public function changeCurrentInstance():void {
 			currentInstance++;
 			var ev:PlantEvent = new PlantEvent(PlantEvent.INSTANCE_CHANGED);
 			ev.plant = this;

@@ -1,6 +1,7 @@
 package view 
 {
 	import com.eclecticdesignstudio.motion.Actuate;
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
@@ -168,9 +169,14 @@ package view
 		
 		
 		
-		private function populateDetails(p:Plant, plantContainer:PlantContainerViewer) {
+		private function populateDetails(p:Plant, plantContainer:PlantContainerViewer):void {
 			plantDetails.txPlantName.text = p.name;
-			for (var d:int = 0; d < p.hintsShow.length - 1; d++) {
+			for (var q:int = plantDetails.numChildren - 1; q >=0; q-- ) {
+				if (plantDetails.getChildAt(q) is Dica) {
+					plantDetails.removeChildAt(q);
+				}
+			}
+			for (var d:int = 0; d < p.hintsShow.length; d++) {
 				var dica:Dica = new Dica();
 				dica.txNumHint.text = String(d + 1);
 				dica.txTextHint.text = p.hintsShow[d];
@@ -182,7 +188,7 @@ package view
 			plantDetails.y = plantPicker.y - 15;
 			plantDetails.x = (plantPicker.x + plantContainer.x + (plantContainer.width / 2)) + 30;
 		}
-		private function showDetails() {
+		private function showDetails():void {
 				Actuate.tween(plantDetails, 1, { alpha:1 } );
 		}
 		private function hideDetails(vel:int=1) {
