@@ -8,7 +8,7 @@ package model
 	public class PlantLoader 
 	{
 		private static var _instance:PlantLoader = new PlantLoader();
-		public static var amtnInstances:int = 5;
+		public static var amtnInstances:int = 3;
 		public function PlantLoader() 
 		{
 			if( _instance ) throw new Error( "PlantLoader can only be accessed through PlantLoader.getInstance()" ); 

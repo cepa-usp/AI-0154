@@ -93,7 +93,7 @@ package view
 		
 		
 		public function loadScenario():void {
-			layer_background = new Background();						
+			layer_background = new BackgroundScenario();						
 			addChild(layer_background);
 			layerGround = new Sprite();
 			addChild(layerGround);
