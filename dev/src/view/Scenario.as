@@ -100,8 +100,8 @@ package view
 			layerPlants = new Sprite();
 			addChild(layerPlants);
 			plantPicker = new PlantPicker(mdl);
-			plantPicker.x = 40;
-			plantPicker.y = this.height - plantPicker.height - 40;
+			plantPicker.x = 10;
+			plantPicker.y = this.height - plantPicker.height + 10;
 			bindPicker();
 			addChild(plantPicker);
 			addChild(plantDetails);
