@@ -1,6 +1,7 @@
 package model 
 {
 	import flash.geom.Rectangle;
+	import flash.utils.Dictionary;
 	/**
 	 * ...
 	 * @author Arthur
@@ -8,10 +9,21 @@ package model
 	public class PlantLoader 
 	{
 		private static var _instance:PlantLoader = new PlantLoader();
+		private var terrain:Dictionary;
 		public static var amtnInstances:int = 3;
 		public function PlantLoader() 
 		{
+			terrain = new Dictionary();
+			createTerrain();
 			if( _instance ) throw new Error( "PlantLoader can only be accessed through PlantLoader.getInstance()" ); 
+		}
+		
+		public function createTerrain() {
+			var t1:Array = [
+				new Rectangle(0, 0, 4, 4),
+				new Rectangle(0, 0, 4, 4),
+			];
+			terrain["floresta"] = t1;
 		}
 		
 		public function load(mdl:Model):void {

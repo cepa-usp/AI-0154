@@ -18,6 +18,7 @@ package view
 	{
 		
 		private var mdl:Model;
+		private var debug:Boolean = true;
 		private var layer_background:Sprite;
 		private var layerGhost:Sprite = new Sprite();
 		private var layerPlants:Sprite = new Sprite();
