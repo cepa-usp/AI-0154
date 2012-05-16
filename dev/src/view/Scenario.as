@@ -1,11 +1,13 @@
 package view 
 {
 	import com.eclecticdesignstudio.motion.Actuate;
+	import flash.accessibility.Accessibility;
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import model.Area;
 	import model.Model;
 	import model.Plant;
 	import model.PlantEvent;
@@ -22,6 +24,8 @@ package view
 		private var layer_background:Sprite;
 		private var layerGhost:Sprite = new Sprite();
 		private var layerPlants:Sprite = new Sprite();
+		private var layerGrid:Sprite = new Sprite();
+		private var layerBlocks:Sprite = new Sprite();
 		private var plantDetails:PlantDetails = new PlantDetails();
 		private var plants:Vector.<PlantGraphics> = new Vector.<PlantGraphics>();
 		private var plantPicker:PlantPicker;
@@ -33,6 +37,7 @@ package view
 			this.mdl = mdl;
 			bindModelEvents();
 			loadScenario();
+			drawGrid();
 		}
 		
 		private function bindModelEvents():void 
@@ -41,10 +46,63 @@ package view
 			mdl.eventDispatcher.addEventListener(PlantEvent.STATE_CHANGED, onPlantStateChanged);
 		}
 		
+		private function highLightArea(a:Area) {
+			layerBlocks.graphics.clear;			
+			for (var i:int = 0; i < a.areas.length; i++ ) {
+				if (a.areas[i] is Array) {
+					highLightArea2(a.areas[i][0], a.areas[i][1], a.cor);
+				}
+				if (a.areas[i] is Rectangle) {
+					var r:Rectangle = a.areas[i];
+					for (var x:int = r.x; x < r.width; x++) {
+						for (var y:int = r.y; y < r.height; y++) {
+							highLightArea2(x, y, a.cor);	
+						}
+					}
+					
+				}				
+			}
+		}
+		
+		private function highLightArea2(x:int, y:int, color:int) {		
+			var w:int = width;
+			var h:int = height;
+
+			var qtx = w / mdl.environment.width;
+			var qty = h / mdl.environment.height;
+			var offx = qtx/2 +1 ;
+			var offy = qty / 2 + 2;
+			layerBlocks.graphics.beginFill(color, 0.4);
+			layerBlocks.graphics.drawRect(offx + x * qtx, offy + y * qty, qtx, qty);
+			
+		}
+		
+		private function drawGrid():void {
+			
+			layerGrid.graphics.lineStyle(1, 0, 1);			
+			var w:int = width;
+			var h:int = height;
+
+			var qtx = w / mdl.environment.width;
+			var qty = h / mdl.environment.height;
+			var offx = qtx/2 +1 ;
+			var offy = qty/2 + 2;			
+			for (var x:int = 0; x < mdl.environment.width; x ++  ) {
+				layerGrid.graphics.moveTo(offx + x * qtx, 0);				
+				layerGrid.graphics.lineTo(offx + x * qtx, h);
+			}
+			for (var y:int = 0; y < mdl.environment.height; y++ ) {
+				layerGrid.graphics.moveTo(0, offy + y * qty);				
+				layerGrid.graphics.lineTo(w, offy + y * qty);				
+			}							
+		}
+		
 		private function onPlantStateChanged(e:PlantEvent):void 
 		{
 			// ajusta pontuação
 		}
+		
+
 		
 		private function onPlantPositionSet(e:PlantEvent):void 
 		{			
@@ -59,8 +117,8 @@ package view
 			var scaleH:Number = getSquareHeight() / pg.height
 			var scaleFactor:Number = Math.min(scaleW, scaleH);
 			scaleFactor *= 2;
-			pg.scaleX = scaleFactor;
-			pg.scaleY = scaleFactor;
+			//pg.scaleX = scaleFactor;
+			//pg.scaleY = scaleFactor;
 			layerPlants.addChild(pg);
 			plants.push(pg);
 			Actuate.timer(2).onComplete(plantFixed, pg.instance)
@@ -99,14 +157,18 @@ package view
 			layerGround = new Sprite();
 			addChild(layerGround);
 			layerPlants = new Sprite();
+			addChild(layerBlocks);
+			addChild(layerGrid);
 			addChild(layerPlants);
 			plantPicker = new PlantPicker(mdl);
 			plantPicker.x = 10;
 			plantPicker.y = this.height - plantPicker.height + 10;
 			bindPicker();
+
 			addChild(plantPicker);
-			addChild(plantDetails);
+			addChild(plantDetails);			
 			addChild(layerGhost);
+			
 		}
 		
 		private function createGhost(plantContainer:PlantContainerViewer) {

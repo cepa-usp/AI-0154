@@ -43,8 +43,7 @@ package view
 			return p;
 		}
 				
-		private function onEnterFrame(e:Event):void {
-			trace(src.currentFrame);
+		private function onEnterFrame(e:Event):void {			
 			if (src.currentFrame >= (_state + FRAMES - 1)) {
 				if (_state == STATE_DEAD) {
 					onDead();
