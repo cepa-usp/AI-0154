@@ -8,6 +8,7 @@ package view
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import model.Area;
+	import model.Areas;
 	import model.Model;
 	import model.Plant;
 	import model.PlantEvent;
@@ -47,15 +48,15 @@ package view
 		}
 		
 		private function highLightArea(a:Area) {
-			layerBlocks.graphics.clear;			
+			layerBlocks.graphics.clear();			
 			for (var i:int = 0; i < a.areas.length; i++ ) {
 				if (a.areas[i] is Array) {
 					highLightArea2(a.areas[i][0], a.areas[i][1], a.cor);
 				}
 				if (a.areas[i] is Rectangle) {
 					var r:Rectangle = a.areas[i];
-					for (var x:int = r.x; x < r.width; x++) {
-						for (var y:int = r.y; y < r.height; y++) {
+					for (var x:int = r.x; x < r.x + r.width; x++) {
+						for (var y:int = r.y; y < r.y + r.height; y++) {
 							highLightArea2(x, y, a.cor);	
 						}
 					}
@@ -70,23 +71,27 @@ package view
 
 			var qtx = w / mdl.environment.width;
 			var qty = h / mdl.environment.height;
-			var offx = qtx/2 +1 ;
-			var offy = qty / 2 + 2;
-			layerBlocks.graphics.beginFill(color, 0.4);
+			var offx = 0; // qtx / 2 +1 ;
+			var offy = 0; //qty / 2 + 2;
+			layerBlocks.graphics.beginFill(color);
 			layerBlocks.graphics.drawRect(offx + x * qtx, offy + y * qty, qtx, qty);
 			
 		}
 		
 		private function drawGrid():void {
-			
+/*			highLightArea(Areas.RelevoSombra);
+			highLightArea(Areas.PlanoIluminado);
+			highLightArea(Areas.MediaSombra);
+			highLightArea(Areas.MorroMataVerde);
+			highLightArea(Areas.Floresta); */
 			layerGrid.graphics.lineStyle(1, 0, 1);			
 			var w:int = width;
 			var h:int = height;
 
 			var qtx = w / mdl.environment.width;
 			var qty = h / mdl.environment.height;
-			var offx = qtx/2 +1 ;
-			var offy = qty/2 + 2;			
+			var offx = 0; //qtx/2 +1 ;
+			var offy = 0; //qty/2 + 2;			
 			for (var x:int = 0; x < mdl.environment.width; x ++  ) {
 				layerGrid.graphics.moveTo(offx + x * qtx, 0);				
 				layerGrid.graphics.lineTo(offx + x * qtx, h);
@@ -111,9 +116,9 @@ package view
 			pg.plant = e.plant;
 			mdl.eventDispatcher.addEventListener(PlantEvent.STATE_CHANGED, pg.onPlantInstanceStateChanged);
 			var p:Point = getPixelPosition(e.instance.getPosition().x, e.instance.getPosition().y);			
-			pg.x = p.x;
-			pg.y = p.y;
-			var scaleW:Number = getSquareWidth() / pg.width
+			pg.x = p.x + (pg.width/2);
+			pg.y = p.y + (pg.height/2);
+			var scaleW:Number = getSquareWidth() / pg.width 
 			var scaleH:Number = getSquareHeight() / pg.height
 			var scaleFactor:Number = Math.min(scaleW, scaleH);
 			scaleFactor *= 2;
@@ -128,6 +133,7 @@ package view
 			var ev:ScenarioEvent = new ScenarioEvent(ScenarioEvent.PLANT_FIXED, true);
 			ev.vars.instance = instance;
 			dispatchEvent(ev);
+			
 		}
 		
 		
@@ -153,6 +159,7 @@ package view
 		
 		public function loadScenario():void {
 			layer_background = new BackgroundScenario();						
+			layer_background.alpha = 0.71;
 			addChild(layer_background);
 			layerGround = new Sprite();
 			addChild(layerGround);
@@ -208,16 +215,38 @@ package view
 				pc.buttonMode = true;
 				pc.useHandCursor = true;
 				mdl.eventDispatcher.addEventListener(PlantEvent.INSTANCE_CHANGED, pc.onInstanceChanged);
+				mdl.eventDispatcher.addEventListener(PlantEvent.STATE_CHANGED, pc.onPlantStateChanged);
 				pc.addEventListener(MouseEvent.MOUSE_OVER, onPlantContainerMouseOver);
 				pc.addEventListener(MouseEvent.MOUSE_OUT, function(e:MouseEvent):void {
 					hideDetails();
 				});	
+				pc.addEventListener(MouseEvent.MOUSE_OUT, onPlantContainerMouseOut);
 				pc.addEventListener(MouseEvent.MOUSE_DOWN, onPlantContainerMouseDown);
 			}
 		}
 		
+		private function onPlantContainerMouseOut(e:MouseEvent):void 
+		{
+			
+			hideAreas();
+			
+		}
+		
+		private function showAreas(p:Plant) {
+			if (!p.correct) return;
+			for each(var a:Area in  p.areas) {
+				highLightArea(a);
+			}
+			Actuate.tween(layerBlocks, 0.5, { alpha:0.4 } );
+		}
+		
+		private function hideAreas() {
+			Actuate.tween(layerBlocks, 0.5, { alpha:0.0 } );
+		}
+		
 		private function onPlantContainerMouseDown(e:MouseEvent):void 
 		{
+			
 			if (!PlantContainerViewer(e.target).enabled) return;
 			hideDetails(0.5);
 			createGhost(PlantContainerViewer(e.target));
@@ -225,6 +254,9 @@ package view
 		
 		private function onPlantContainerMouseOver(e:MouseEvent):void 
 		{
+			var p:Plant = PlantContainerViewer(e.target).plant;
+			showAreas(p);
+
 			var pc2:PlantContainerViewer = PlantContainerViewer(e.target);
 			populateDetails(pc2.plant, pc2);
 			showDetails();
@@ -254,7 +286,8 @@ package view
 		private function showDetails():void {
 				Actuate.tween(plantDetails, 1, { alpha:1 } );
 		}
-		private function hideDetails(vel:int=1) {
+		private function hideDetails(vel:int = 1) {
+			
 			Actuate.tween(plantDetails, vel, { alpha:0 } );
 		}
 		

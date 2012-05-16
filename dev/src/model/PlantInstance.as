@@ -35,7 +35,8 @@ package model
 		
 		public function evaluatePosition():void {
 			if (environment.isPositionForPlant(plant.id, _position.x, _position.y)) {
-				state = STATE_POSITION_RIGHT;
+				_plant.correct = true;
+				state = STATE_POSITION_RIGHT;				
 			} else {
 				state = STATE_POSITION_WRONG;
 			}

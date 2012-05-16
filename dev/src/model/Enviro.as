@@ -38,8 +38,8 @@ package model
 		}
 		
 		public function setRegionsForPlant(plantId:int, rect:Rectangle) {
-			for (var x:int = 0; x < rect.width; x++ ) {
-				for (var y:int = 0; y < rect.height; y++ ) {
+			for (var x:int = rect.x; x <= rect.x + rect.width; x++ ) {
+				for (var y:int = rect.y; y <= rect.y + rect.height; y++ ) {
 					setRegionsForPlant2(plantId, x, y);
 				}				
 			}

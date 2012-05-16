@@ -62,22 +62,22 @@ package view
 		public static function getPlantGraphics(id:int):PlantGraphics {
 			switch(id) {
 				case 1:
-					return preparePlant(new Plant1());
+					return preparePlant(new Plant4());
 					break;
 				case 2:
-					return preparePlant(new Plant2());
-					break;					
-				case 3:
 					return preparePlant(new Plant3());
 					break;					
+				case 3:
+					return preparePlant(new Plant6());
+					break;					
 				case 4:
-					return preparePlant(new Plant4());
+					return preparePlant(new Plant2());
 					break;					
 				case 5:
 					return preparePlant(new Plant5());
 					break;										
 				case 6:
-					return preparePlant(new Plant6());				
+					return preparePlant(new Plant8());				
 					break;							
 				case 7:
 					return preparePlant(new Plant7());
