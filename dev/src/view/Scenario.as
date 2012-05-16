@@ -112,6 +112,7 @@ package view
 		private function onPlantPositionSet(e:PlantEvent):void 
 		{			
 			var pg:PlantGraphics = PlantGraphics.getPlantGraphics(e.plant.id);
+			pg.mouseChildren = false;
 			pg.instance = e.instance;
 			pg.plant = e.plant;
 			mdl.eventDispatcher.addEventListener(PlantEvent.STATE_CHANGED, pg.onPlantInstanceStateChanged);
@@ -125,8 +126,23 @@ package view
 			//pg.scaleX = scaleFactor;
 			//pg.scaleY = scaleFactor;
 			layerPlants.addChild(pg);
+			pg.addEventListener(MouseEvent.MOUSE_OVER, onFixedPlantMouseOver);
+			pg.addEventListener(MouseEvent.MOUSE_OUT, onFixedPlantMouseOut);
 			plants.push(pg);
 			Actuate.timer(2).onComplete(plantFixed, pg.instance)
+		}
+		
+		private function onFixedPlantMouseOut(e:MouseEvent):void 
+		{
+			hideAreas();
+
+		}
+		
+		private function onFixedPlantMouseOver(e:MouseEvent):void 
+		{
+						var p:Plant = PlantGraphics(e.target).plant;			
+			showAreas(p);
+				
 		}
 
 		private function plantFixed(instance:PlantInstance):void {
@@ -275,13 +291,24 @@ package view
 				var dica:Dica = new Dica();
 				dica.txNumHint.text = String(d + 1);
 				dica.txTextHint.text = p.hintsShow[d];
-				dica.y = plantDetails.hintContainer.y + ((d+1) * dica.height);
+				dica.x = plantDetails.hintContainer.x;
+				dica.y = plantDetails.hintContainer.y + ((d) * dica.height);
 				plantDetails.addChild(dica);
 				if (d == 2) break;
 			}
 			
 			plantDetails.y = plantPicker.y - 15;
-			plantDetails.x = (plantPicker.x + plantContainer.x + (plantContainer.width / 2)) + 30;
+			var offX:int  = plantDetails.width / 2
+			if (p.id >= 5) {
+				offX *= -1;
+				plantDetails.setaDir.visible = true;
+				plantDetails.setaEsq.visible = false;
+			} else {
+				plantDetails.setaDir.visible = false;
+				plantDetails.setaEsq.visible = true;				
+			}
+			plantDetails.x = (plantPicker.x + plantContainer.x) + offX;
+			
 		}
 		private function showDetails():void {
 				Actuate.tween(plantDetails, 1, { alpha:1 } );
