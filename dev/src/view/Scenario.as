@@ -186,11 +186,13 @@ package view
 			addChild(layerPlants);
 			plantPicker = new PlantPicker(mdl);
 			plantPicker.x = 2;
-			plantPicker.y = this.height - plantPicker.height - 30;
+			plantPicker.y = this.height - plantPicker.height + 1;
 			bindPicker();
 
 			addChild(plantPicker);
 			addChild(plantDetails);			
+			plantDetails.alpha = 0.01;
+			hideDetails();
 			addChild(layerGhost);
 			
 		}
