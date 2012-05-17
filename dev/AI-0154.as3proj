@@ -15,6 +15,7 @@
   <classpaths>
     <class path="src" />
     <class path="..\..\Framework\dev\AI\lib" />
+    <class path="..\..\Framework\dev\AI\src" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -49,6 +50,8 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\arte.swc" />
+    <element path="..\..\Framework\dev\AI\lib\ui.swc" />
+    <element path="..\..\Framework\dev\AI\lib\as3corelib.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>

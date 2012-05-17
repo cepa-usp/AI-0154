@@ -1,5 +1,6 @@
 package view 
 {
+	import cepa.AIObserver;
 	import com.eclecticdesignstudio.motion.Actuate;
 	import flash.accessibility.Accessibility;
 	import flash.display.DisplayObject;
@@ -17,7 +18,7 @@ package view
 	 * ...
 	 * @author Arthur
 	 */
-	public class Scenario extends Sprite
+	public class Scenario extends Sprite implements AIObserver
 	{
 		
 		private var mdl:Model;
@@ -47,7 +48,7 @@ package view
 			mdl.eventDispatcher.addEventListener(PlantEvent.STATE_CHANGED, onPlantStateChanged);
 		}
 		
-		private function highLightArea(a:Area) {
+		private function highLightArea(a:Area):void {
 			layerBlocks.graphics.clear();			
 			for (var i:int = 0; i < a.areas.length; i++ ) {
 				if (a.areas[i] is Array) {
@@ -184,8 +185,8 @@ package view
 			addChild(layerGrid);
 			addChild(layerPlants);
 			plantPicker = new PlantPicker(mdl);
-			plantPicker.x = 10;
-			plantPicker.y = this.height - plantPicker.height + 10;
+			plantPicker.x = 2;
+			plantPicker.y = this.height - plantPicker.height - 30;
 			bindPicker();
 
 			addChild(plantPicker);
@@ -194,7 +195,7 @@ package view
 			
 		}
 		
-		private function createGhost(plantContainer:PlantContainerViewer) {
+		private function createGhost(plantContainer:PlantContainerViewer):void {
 			ghost =  PlantGraphics.getPlantGraphics(plantContainer.plant.id);
 			ghost.plant = plantContainer.plant;
 			ghost.changeState(PlantGraphics.STATE_MOUSEOVER);
@@ -317,6 +318,32 @@ package view
 			
 			Actuate.tween(plantDetails, vel, { alpha:0 } );
 		}
+		
+		/* INTERFACE cepa.AIObserver */
+		
+		public function onResetClick() 
+		{
+			
+		}
+		
+		public function onScormFetch() 
+		{
+			
+		}
+		
+		public function onScormSave() 
+		{
+			
+		}
+		
+		public function onTutorialClick() 
+		{
+			
+		}
+		
+		/* INTERFACE cepa.AIObserver */
+		
+
 		
 	}
 
