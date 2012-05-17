@@ -68,6 +68,7 @@ package model
 			p_3.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_3);			
 			addArea(p_3, Areas.MediaSombra);
+			addArea(p_3, Areas.Floresta);
 			//mdl.environment.setRegionsForPlant(3, new Rectangle(50, 0, 20, 20));
 			
 			
@@ -82,6 +83,8 @@ package model
 			mdl.plants.push(p_4);			
 			addArea(p_4, Areas.Floresta);
 			addArea(p_4, Areas.PlanoIluminado);
+			addArea(p_4, Areas.RelevoSombra);
+			addArea(p_4, Areas.MorroMataVerde);
 			//mdl.environment.setRegionsForPlant(4, new Rectangle(50, 0, 20, 20));
 			
 			
@@ -107,7 +110,9 @@ package model
 			p_6.name = "Angiosperma";
 			p_6.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_6);			
-			addArea(p_6, Areas.MorroMataVerde);
+			addArea(p_6, Areas.PlanoIluminado);
+			addArea(p_6, Areas.MediaSombra);
+			addArea(p_6, Areas.RelevoSombra);
 			
 			//mdl.environment.setRegionsForPlant(6, new Rectangle(50, 0, 20, 20));
 

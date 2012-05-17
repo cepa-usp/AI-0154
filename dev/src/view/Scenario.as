@@ -49,7 +49,7 @@ package view
 		}
 		
 		private function highLightArea(a:Area):void {
-			layerBlocks.graphics.clear();			
+						
 			for (var i:int = 0; i < a.areas.length; i++ ) {
 				if (a.areas[i] is Array) {
 					highLightArea2(a.areas[i][0], a.areas[i][1], a.cor);
@@ -251,8 +251,9 @@ package view
 			
 		}
 		
-		private function showAreas(p:Plant) {
+		private function showAreas(p:Plant) {			
 			if (!p.correct) return;
+			layerBlocks.graphics.clear();
 			for each(var a:Area in  p.areas) {
 				highLightArea(a);
 			}
