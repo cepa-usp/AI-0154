@@ -1,6 +1,5 @@
 package model 
 {
-	import model.Area;
 	/**
 	 * ...
 	 * @author Arthur
@@ -11,10 +10,8 @@ package model
 		private var _name:String = "";
 		private var _id:int = 0;
 		private var _hintsShow:Vector.<String> = new Vector.<String>();
-		private var _areas:Vector.<Area> = new Vector.<Area>();
 		private var _instances:Vector.<PlantInstance>;
 		private var _currentInstance:int = 0;
-		private var _correct:Boolean = false;
 		private var mdl:Model;
 		
 		public function Plant(id:int, mdl:Model) 
@@ -100,26 +97,6 @@ package model
 		{
 			_currentInstance = value;
 		}
-		
-		public function get correct():Boolean 
-		{
-			return _correct;
-		}
-		
-		public function set correct(value:Boolean):void 
-		{
-			_correct = value;
-		}
-		
-		public function get areas():Vector.<Area> 
-		{
-			return _areas;
-		}
-		
-		public function set areas(value:Vector.<Area>):void 
-		{
-			_areas = value;
-		}
 
 		public function seedInstance(x:int, y:int):void {
 			instances[currentInstance].setPosition(x, y);
@@ -147,11 +124,6 @@ package model
 			var ev:PlantEvent = new PlantEvent(PlantEvent.INSTANCE_CHANGED);
 			ev.plant = this;
 			mdl.eventDispatcher.dispatchEvent(ev)
-		}
-		
-		public function addAreas(area:Area):void 
-		{
-			this._areas.push(area);
 		}
 		
 	}

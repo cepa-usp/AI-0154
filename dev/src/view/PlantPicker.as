@@ -4,7 +4,6 @@ package view
 	import flash.events.MouseEvent;
 	import model.Model;
 	import model.Plant;
-	import model.PlantEvent;
 	/**
 	 * ...
 	 * @author Arthur Tofani
@@ -23,7 +22,6 @@ package view
 			var i:int = 0;
 			for each (var p:Plant in mdl.plants) {
 				var plantContainer:PlantContainerViewer = new PlantContainerViewer(p);
-				
 				var plantImage:PlantGraphics = PlantGraphics.getPlantGraphics(p.id);
 				var scaleW:Number = (plantContainer.width - 10) / plantImage.width
 				var scaleH:Number = (plantContainer.height - 10) / plantImage.height

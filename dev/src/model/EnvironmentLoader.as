@@ -16,7 +16,7 @@ package model
 		
 		
 		public function load(mdl:Model):void {
-			var env:Enviro = new Enviro(12, 14);
+			var env:Enviro = new Enviro(70, 50);
 			mdl.environment = env;
 			
 		}

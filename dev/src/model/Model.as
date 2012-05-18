@@ -18,7 +18,6 @@ package model
 			eventDispatcher.dispatchEvent(new Event("MODEL_LOADED"));
 		}
 		
-		
 		public function get plants():Vector.<Plant> 
 		{
 			return _plants;
