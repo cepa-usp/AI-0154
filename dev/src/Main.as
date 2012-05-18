@@ -2,6 +2,7 @@ package
 {
 	import cepa.AI;
 	import cepa.AIObserver;
+	import cepa.ToolTip;
 	import controller.ScenarioController;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -36,7 +37,24 @@ package
 			startLO();
 			ai.container.setAboutScreen(new AboutScreen());
 			ai.container.setInfoScreen(new InstScreen());
+			createToolTips();
 			tut.iniciar(stage);
+		}
+		
+				/**
+		 * Cria os tooltips nos botões
+		 */
+		private function createToolTips():void 
+		{
+			var intTT:ToolTip = new ToolTip(ai.container.optionButtons.tutorialBtn, "Reiniciar tutorial", 12, 0.8, 150, 0.6, 0.1);
+			var instTT:ToolTip = new ToolTip(ai.container.optionButtons.orientacoesBtn, "Orientações", 12, 0.8, 100, 0.6, 0.1);
+			var resetTT:ToolTip = new ToolTip(ai.container.optionButtons.resetButton, "Reiniciar", 12, 0.8, 100, 0.6, 0.1);
+			var infoTT:ToolTip = new ToolTip(ai.container.optionButtons.creditos, "Créditos", 12, 0.8, 100, 0.6, 0.1);
+			
+			addChild(intTT);
+			addChild(instTT);
+			addChild(resetTT);
+			addChild(infoTT);
 		}
 		
 		private function startLO() {

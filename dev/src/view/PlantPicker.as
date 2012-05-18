@@ -40,7 +40,7 @@ package view
 				plantContainer.addEventListener(MouseEvent.MOUSE_OVER, onPlantContainerMouseOver);
 				plantContainer.addEventListener(MouseEvent.MOUSE_OUT, onPlantContainerMouseOut);				
 				addChild(plantContainer);
-				plantContainer.x = pos
+				plantContainer.x = pos + 100;
 				pos += plantContainer.width + 5;
 				i++;
 			}			
