@@ -1,16 +1,21 @@
 package 
 {
+	import cepa.AI;
+	import cepa.AIObserver;
 	import controller.ScenarioController;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.geom.Point;
 	import model.Model;
+	import tutorial.CaixaTexto;
+	import tutorial.Tutorial;
 	import view.Scenario;
 	
 	/**
 	 * ...
 	 * @author Arthur
 	 */
-	public class Main extends Sprite 
+	public class Main extends Sprite implements AIObserver
 	{
 		
 		public function Main():void 
@@ -18,17 +23,19 @@ package
 			if (stage) init();
 			else addEventListener(Event.ADDED_TO_STAGE, init);
 		}
-		
+		private var ai:AI; 
+		private var tut:Tutorial = new Tutorial();
+		private var scenario:Scenario;
 		private function init(e:Event = null):void 
-		{
+		{			
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-<<<<<<< HEAD
 			
 			fazerTutorial();			
 			ai = new AI(this);
 			ai.addObserver(this)
 			startLO();
-
+			ai.container.setAboutScreen(new AboutScreen());
+			ai.container.setInfoScreen(new InstScreen());
 			tut.iniciar(stage);
 		}
 		
@@ -68,13 +75,14 @@ package
 		
 		public function onScormSave() 
 		{
-=======
-			var mdl:Model = new Model();
-			var scenario:Scenario = new Scenario(mdl);			
-			addChild(scenario);
-			var ctrl:ScenarioController = new ScenarioController(mdl, scenario);
->>>>>>> 21a8774f4c33cdc57be6a5c84878fa7e56182d18
 			
+		}
+		
+		public function onTutorialClick() 
+		{
+
+		tut.iniciar(stage);
+		 
 		}
 		
 	}

@@ -11,6 +11,7 @@ package model
 		private static var _instance:PlantLoader = new PlantLoader();
 		private var terrain:Dictionary;
 		public static var amtnInstances:int = 3;
+		private var mdl:Model;
 		public function PlantLoader() 
 		{
 			terrain = new Dictionary();
@@ -26,7 +27,13 @@ package model
 			terrain["floresta"] = t1;
 		}
 		
+		public function addArea(plant:Plant, area:Area) {
+			mdl.environment.setAreaForPlant(plant.id, area);
+			plant.addAreas(area);
+		}
+		
 		public function load(mdl:Model):void {
+			this.mdl = mdl;
 			var p_1:Plant = new Plant(1, mdl);
 			p_1.hints.push("Sou uma “briófita” do tipo hepática. Ocorro em ambientes úmidos e sombreados, crescendo em agrupamentos para garantir certa umidade.");
 			p_1.hints.push("Como toda “briófita”, dependo muito da água e as gotas de chuva facilitam a dispersão dos meus anterozoides que são flagelados.");
@@ -36,8 +43,7 @@ package model
 			p_1.name = "Hepática";
 			p_1.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_1);
-			mdl.environment.setRegionsForPlant(1, new Rectangle(0, 0, 10, 10));
-			mdl.environment.setRegionsForPlant(1, new Rectangle(22, 16, 4, 6));
+			addArea(p_1, Areas.Floresta);
 			
 			var p_2:Plant = new Plant(2, mdl);
 			p_2.hints.push("Nós antóceros somos um pequeno grupo de representantes de “briófitas”. Nosso gametófito taloso é a fase dominante e geralmente forma uma roseta muito delicada.");
@@ -48,8 +54,9 @@ package model
 			p_2.name = "Antóceros";
 			p_2.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_2);			
-			mdl.environment.setRegionsForPlant(2, new Rectangle(50, 0, 20, 20));
-			mdl.environment.setRegionsForPlant(2, new Rectangle(0, 0, 10, 10));	
+			addArea(p_2, Areas.Floresta);
+			//mdl.environment.setRegionsForPlant(2, new Rectangle(50, 0, 20, 20));
+			//mdl.environment.setRegionsForPlant(2, new Rectangle(0, 0, 10, 10));	
 			
 			var p_3:Plant = new Plant(3, mdl);
 			p_3.hints.push("Dentre as “briófitas” eu sou a mais adaptada às condições terrestres e, por isso, posso crescer em ambientes um pouco mais ensolarados.");
@@ -60,7 +67,9 @@ package model
 			p_3.name = "Musgos";
 			p_3.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_3);			
-			mdl.environment.setRegionsForPlant(3, new Rectangle(50, 0, 20, 20));
+			addArea(p_3, Areas.MediaSombra);
+			addArea(p_3, Areas.Floresta);
+			//mdl.environment.setRegionsForPlant(3, new Rectangle(50, 0, 20, 20));
 			
 			
 			var p_4:Plant = new Plant(4, mdl);
@@ -72,7 +81,11 @@ package model
 			p_4.name = "Samambaia";
 			p_4.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_4);			
-			mdl.environment.setRegionsForPlant(4, new Rectangle(50, 0, 20, 20));
+			addArea(p_4, Areas.Floresta);
+			addArea(p_4, Areas.PlanoIluminado);
+			addArea(p_4, Areas.RelevoSombra);
+			addArea(p_4, Areas.MorroMataVerde);
+			//mdl.environment.setRegionsForPlant(4, new Rectangle(50, 0, 20, 20));
 			
 			
 			var p_5:Plant = new Plant(5, mdl);
@@ -83,8 +96,10 @@ package model
 			p_5.name = "Gimnosperma";
 			p_5.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_5);			
-			mdl.environment.setRegionsForPlant(5, new Rectangle(50, 0, 20, 20));
-			mdl.environment.setRegionsForPlant(5, new Rectangle(0, 0, 10, 10));				
+			addArea(p_5, Areas.MorroMataVerde);
+			
+			//mdl.environment.setRegionsForPlant(5, new Rectangle(50, 0, 20, 20));
+			//mdl.environment.setRegionsForPlant(5, new Rectangle(0, 0, 10, 10));				
 			
 			
 			var p_6:Plant = new Plant(6, mdl);
@@ -95,7 +110,11 @@ package model
 			p_6.name = "Angiosperma";
 			p_6.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_6);			
-			mdl.environment.setRegionsForPlant(6, new Rectangle(50, 0, 20, 20));
+			addArea(p_6, Areas.PlanoIluminado);
+			addArea(p_6, Areas.MediaSombra);
+			addArea(p_6, Areas.RelevoSombra);
+			
+			//mdl.environment.setRegionsForPlant(6, new Rectangle(50, 0, 20, 20));
 
 			var p_7:Plant = new Plant(7, mdl);
 			p_7.hints.push("Sou uma planta vascular do tipo espermatófita, portanto tenho semente. Porém, minha semente é nua, diferente das angiospermas.");
@@ -105,8 +124,9 @@ package model
 			p_7.name = "Gimnosperma 2";
 			p_7.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_7);			
-			mdl.environment.setRegionsForPlant(7, new Rectangle(50, 0, 20, 20));
-			mdl.environment.setRegionsForPlant(7, new Rectangle(0, 0, 10, 10));				
+			addArea(p_7, Areas.MorroMataVerde);
+			//mdl.environment.setRegionsForPlant(7, new Rectangle(50, 0, 20, 20));
+			//mdl.environment.setRegionsForPlant(7, new Rectangle(0, 0, 10, 10));				
 			
 			
 			var p_8:Plant = new Plant(8, mdl);
@@ -117,7 +137,8 @@ package model
 			p_8.name = "Angiosperma 2";
 			p_8.createInstances(amtnInstances, mdl.environment);			
 			mdl.plants.push(p_8);			
-			mdl.environment.setRegionsForPlant(8, new Rectangle(50, 0, 20, 20));			
+			addArea(p_8, Areas.MorroMataVerde);
+			//mdl.environment.setRegionsForPlant(8, new Rectangle(50, 0, 20, 20));			
 			
 		}
 		
