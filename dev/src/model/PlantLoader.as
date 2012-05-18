@@ -122,9 +122,9 @@ package model
 			p_7.hints.push("Sou uma “gimnosperma” e a água não é mais necessária para que o gameta masculino alcance a oosfera. Nossa fecundação é auxiliada pela polinização e a formação de um tubo polínico.");
 			p_7.hints.push("As coníferas são um tipo de “gimnosperma” que dominam muitas comunidades vegetais. Geralmente ocorrem em ambientes de climas temperados a frios.");
 			p_7.name = "Gimnosperma 2";
-			p_7.createInstances(amtnInstances, mdl.environment);			
-			mdl.plants.push(p_7);			
-			addArea(p_7, Areas.MorroMataVerde);
+		//	p_7.createInstances(amtnInstances, mdl.environment);			
+		//	mdl.plants.push(p_7);			
+		//	addArea(p_7, Areas.MorroMataVerde);
 			//mdl.environment.setRegionsForPlant(7, new Rectangle(50, 0, 20, 20));
 			//mdl.environment.setRegionsForPlant(7, new Rectangle(0, 0, 10, 10));				
 			
@@ -135,9 +135,9 @@ package model
 			p_8.hints.push("Assim como as “gimnospermas” podemos alcançar grandes alturas, mas também temos representantes de uns poucos centímetros.");
 			p_8.hints.push("Na nossa fecundação também participa o tubo polínico, permitindo-nos independência da água para a reprodução.");
 			p_8.name = "Angiosperma 2";
-			p_8.createInstances(amtnInstances, mdl.environment);			
-			mdl.plants.push(p_8);			
-			addArea(p_8, Areas.MorroMataVerde);
+		//	p_8.createInstances(amtnInstances, mdl.environment);			
+			//mdl.plants.push(p_8);			
+			//addArea(p_8, Areas.MorroMataVerde);
 			//mdl.environment.setRegionsForPlant(8, new Rectangle(50, 0, 20, 20));			
 			
 		}

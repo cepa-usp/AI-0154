@@ -85,7 +85,7 @@ package view
 			highLightArea(Areas.MediaSombra);
 			highLightArea(Areas.MorroMataVerde);
 			highLightArea(Areas.Floresta); */
-			layerGrid.graphics.lineStyle(1, 0, 1);			
+			layerGrid.graphics.lineStyle(1, 0xFFFFFF, 0.7);			
 			var w:int = width;
 			var h:int = height;
 
@@ -127,6 +127,7 @@ package view
 			//pg.scaleX = scaleFactor;
 			//pg.scaleY = scaleFactor;
 			layerPlants.addChild(pg);
+			pg.rotation = (Math.random() * 30) - 15;
 			pg.addEventListener(MouseEvent.MOUSE_OVER, onFixedPlantMouseOver);
 			pg.addEventListener(MouseEvent.MOUSE_OUT, onFixedPlantMouseOut);
 			plants.push(pg);
@@ -185,7 +186,7 @@ package view
 			addChild(layerGrid);
 			addChild(layerPlants);
 			plantPicker = new PlantPicker(mdl);
-			plantPicker.x = 2;
+			plantPicker.x = 0;
 			plantPicker.y = this.height - plantPicker.height + 1;
 			bindPicker();
 
