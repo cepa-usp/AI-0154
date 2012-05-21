@@ -35,8 +35,8 @@ package
 			ai = new AI(this);
 			ai.addObserver(this)
 			startLO();
-			ai.container.setAboutScreen(new AboutScreen());
-			ai.container.setInfoScreen(new InstScreen());
+			ai.container.setAboutScreen(new ScrAbout());
+			ai.container.setInfoScreen(new ScrInstructions());
 			createToolTips();
 			tut.iniciar(stage);
 		}
