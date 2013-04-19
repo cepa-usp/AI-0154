@@ -1,6 +1,6 @@
 package view 
 {
-	import cepa.AIObserver;
+	import cepa.ai.AIObserver;
 	import com.eclecticdesignstudio.motion.Actuate;
 	import flash.accessibility.Accessibility;
 	import flash.display.DisplayObject;
@@ -323,24 +323,42 @@ package view
 			Actuate.tween(plantDetails, vel, { alpha:0 } );
 		}
 		
-		/* INTERFACE cepa.AIObserver */
 		
-		public function onResetClick() 
+		/* INTERFACE cepa.ai.AIObserver */
+		
+		public function onStatsClick():void 
 		{
 			
 		}
 		
-		public function onScormFetch() 
+		public function onScormConnected():void 
 		{
 			
 		}
 		
-		public function onScormSave() 
+		public function onScormConnectionError():void 
 		{
 			
 		}
 		
-		public function onTutorialClick() 
+		/* INTERFACE cepa.ai.AIObserver */
+		
+		public function onResetClick():void 
+		{
+			
+		}
+		
+		public function onScormFetch():void 
+		{
+			
+		}
+		
+		public function onScormSave():void 
+		{
+			
+		}
+		
+		public function onTutorialClick():void 
 		{
 			
 		}
