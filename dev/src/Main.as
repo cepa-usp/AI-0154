@@ -34,28 +34,14 @@ package
 			
 			fazerTutorial();			
 			ai = new AI(this);
-			ai.addObserver(this)
+			ai.addObserver(this);
+			ai.container.optionButtons.addCreditosButton();
+			ai.container.optionButtons.addOrientacoesButton();
+			ai.container.optionButtons.addTutorialButton();
 			startLO();
 			ai.container.setAboutScreen(new ScrAbout());
 			ai.container.setInfoScreen(new ScrInstructions());
-			createToolTips();
-			tut.iniciar(stage);
-		}
-		
-				/**
-		 * Cria os tooltips nos botões
-		 */
-		private function createToolTips():void 
-		{
-			//var intTT:ToolTip = new ToolTip(ai.container.optionButtons.tutorialBtn, "Reiniciar tutorial", 12, 0.8, 150, 0.6, 0.1);
-			//var instTT:ToolTip = new ToolTip(ai.container.optionButtons.orientacoesBtn, "Orientações", 12, 0.8, 100, 0.6, 0.1);
-			//var resetTT:ToolTip = new ToolTip(ai.container.optionButtons.resetButton, "Reiniciar", 12, 0.8, 100, 0.6, 0.1);
-			//var infoTT:ToolTip = new ToolTip(ai.container.optionButtons.creditos, "Créditos", 12, 0.8, 100, 0.6, 0.1);
-			//
-			//addChild(intTT);
-			//addChild(instTT);
-			//addChild(resetTT);
-			//addChild(infoTT);
+			tut.iniciar(stage, true );
 		}
 		
 		private function startLO() {
@@ -103,7 +89,7 @@ package
 		
 		public function onTutorialClick():void 
 		{
-			tut.iniciar(stage);
+			tut.iniciar(stage, true);
 		}
 		
 		public function onScormConnected():void 
