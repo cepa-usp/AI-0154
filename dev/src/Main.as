@@ -42,6 +42,9 @@ package
 			ai.container.setAboutScreen(new ScrAbout());
 			ai.container.setInfoScreen(new ScrInstructions());
 			tut.iniciar(stage, true );
+			//ai.debugMode = true;
+			ai.initialize();
+			//ai.scorm.setValue("cmi.score_raw", "100");
 		}
 		
 		private function startLO() {
@@ -94,7 +97,10 @@ package
 		
 		public function onScormConnected():void 
 		{
-			
+			ai.scorm.setValue("cmi.score.raw", "100");
+			ai.scorm.setValue("cmi.score.scaled", "1");
+			ai.scorm.setValue("cmi.completion_status", "completed");
+			ai.scorm.save();
 		}
 		
 		public function onScormConnectionError():void 
